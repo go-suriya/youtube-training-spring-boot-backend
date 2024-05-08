@@ -10,10 +10,11 @@ import org.hibernate.annotations.GenericGenerator;
 
 @Data
 @MappedSuperclass
-public class BaseEntity {
+public abstract class BaseEntity {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY, generator = "system-uuid")
-    @GenericGenerator(name = "system-uuid", strategy = "uuid2")
+    @GenericGenerator(name = "uuid2", strategy = "uuid2")
+    @GeneratedValue(strategy = GenerationType.IDENTITY, generator = "uuid2")
     @Column(length = 36, nullable = false, updatable = false)
     private String id;
+
 }
