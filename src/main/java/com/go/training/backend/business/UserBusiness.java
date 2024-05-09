@@ -7,6 +7,7 @@ import com.go.training.backend.mapper.UserMapper;
 import com.go.training.backend.model.MLoginRequest;
 import com.go.training.backend.model.MRegisterRequest;
 import com.go.training.backend.model.MRegisterResponse;
+import com.go.training.backend.service.TokenService;
 import com.go.training.backend.service.UserService;
 import java.io.IOException;
 import java.util.Arrays;
@@ -25,10 +26,12 @@ public class UserBusiness {
 
     private final UserService userService;
     private final UserMapper userMapper;
+    private final TokenService tokenService;
 
-    public UserBusiness(UserService userService, UserMapper userMapper) {
+    public UserBusiness(UserService userService, UserMapper userMapper, TokenService tokenService) {
         this.userService = userService;
         this.userMapper = userMapper;
+        this.tokenService = tokenService;
     }
 
     public String login(MLoginRequest request) throws BaseException {
@@ -44,10 +47,7 @@ public class UserBusiness {
             throw UserException.loginFailedIncorrect();
         }
 
-        // TODO: generate JWT
-        String token = "JWT";
-
-        return token;
+        return tokenService.tokenize(user);
     }
 
     public MRegisterResponse register(MRegisterRequest request) throws BaseException {

@@ -1,2 +1,7 @@
+com/go/training/backend/UserTest$AddressTestCreateData.class
 com/go/training/backend/UserTest.class
+com/go/training/backend/UserTest$AddressTestCreateData2.class
+com/go/training/backend/UserTest$TestUpdateData.class
+com/go/training/backend/UserTest$SocialTestCreateData.class
+com/go/training/backend/UserTest$TestCreateData.class
 com/go/training/backend/BackendApplicationTests.class

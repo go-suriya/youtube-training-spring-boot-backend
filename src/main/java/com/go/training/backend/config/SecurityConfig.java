@@ -1,5 +1,7 @@
 package com.go.training.backend.config;
 
+import com.go.training.backend.config.token.TokenFilterConfiguerer;
+import com.go.training.backend.service.TokenService;
 import java.util.Arrays;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -19,6 +21,12 @@ import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 public class SecurityConfig {
     private final String[] PUBLIC = {"/actuator/**", "/user/register", "/user/login", "/user/activate", "/user/resend-activation-email", "/socket/**"};
 
+    private final TokenService tokenService;
+
+    public SecurityConfig(TokenService tokenService) {
+        this.tokenService = tokenService;
+    }
+
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
@@ -35,7 +43,8 @@ public class SecurityConfig {
         ).cors((cors) -> cors
                 .configurationSource(corsConfigurationSource())
         );
-//                .addFilterBefore(new JwtAuthenticationFilter(tokenService), UsernamePasswordAuthenticationFilter.class);
+//                .addFilterBefore(new TokenFilterConfiguerer(tokenService)).apply(new TokenFilterConfiguerer(tokenService));
+        // .and().apply(new TokenFilterConfiguerer(tokenService));
         return http.build();
     }
 

@@ -21,7 +21,7 @@ public class UserService {
     }
 
     public Optional<User> findByEmail(String email) {
-      return userRepository.findByEmail(email);
+        return userRepository.findByEmail(email);
     }
 
     public boolean matchPassword(String rawPassword, String encodePassword) {
@@ -29,7 +29,7 @@ public class UserService {
     }
 
     public void deleteById(String id) {
-         userRepository.deleteById(id);
+        userRepository.deleteById(id);
     }
 
     public User update(User user) {
